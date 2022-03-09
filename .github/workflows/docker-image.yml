@@ -20,12 +20,11 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: Login
-        uses: docker/login-action@v1
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      uses: docker/login-action@v1
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     - name: Docker push
-        # TODO: ref/tag as docker tag
-        run: |
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest
+      run: |
+        docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest
